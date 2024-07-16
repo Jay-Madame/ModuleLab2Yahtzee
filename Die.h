@@ -1,17 +1,16 @@
 #pragma once
+#include <iostream>
 
 class Die
 {
 private:
-    int sides, faceValue, score;
-    int const bonus;
+    int sides, faceValue;
     int const SIDES;
 
 public:
     Die();
-    Die(int Sides);
+    Die(int sides);
     void roll();
-    void roll(int dicesRolled);
     int getFaceValue();
-    
+    std::string dieToString(int value);
 };
