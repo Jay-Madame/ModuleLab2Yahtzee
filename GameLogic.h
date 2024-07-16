@@ -4,14 +4,16 @@
 class Game
 {
 private:
-    int score, diceRoll;
-    int boxes[13];
+    Die dices[6] = {Die(), Die(), Die(), Die(), Die(), Die()};
+    int score, diceRoll, rounds;
+    //int *boxes = nullptr;
     int const bonus;
 
 public:
     Game();
     Game(int value);
-    rollDices();
-
-
+    int rollDices();
+    int rollDices(int dicesToRoll);
+    int whichBox(int box);
+    int scoreChange(int value);
 };

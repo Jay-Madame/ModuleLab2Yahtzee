@@ -14,18 +14,21 @@ Die::Die(int sides) : SIDES(sides)
 void Die::roll()
 {
     faceValue = rand() % SIDES + 1;
-    std::cout << " \n"
-              << "                  (( _______\n"
-              << "     _______     /\O    O\\n"
-              << "    /O     /\   /  \      \\n"
-              << "   /   O  /O \ / O  \O____O\ ))\n"
-              << "((/_____O/    \\    /O     /\n"
-              << "  \O    O\    / \  /   O  /\n"
-              << "   \O    O\ O/   \/_____O/\n"
-              << "    \O____O\/ ))          ))\n"
-              << "  ((";
 }
 
+void Die::printRoll()
+{
+    std::cout << " \n"
+              << "                    ((______" << std::endl
+              << "     _______        /\\O    O\\" << std::endl
+              << "    /O      /\\     /  \\      \\" << std::endl
+              << "   /   O   /O \\   / O  \\O____O\\ ))" << std::endl
+              << "((/______O/    \\  \\    /O     /" << std::endl
+              << "  \\O    O\\    /    \\  /   O  /" << std::endl
+              << "   \\O    O\\  /      \\/_____O/" << std::endl
+              << "    \\O____O\\/ ))             ))" << std::endl
+              << "  ((" << std::endl;
+}
 int Die::getFaceValue()
 {
     return faceValue;
@@ -37,22 +40,23 @@ std::string Die::dieToString(int value)
     switch (getFaceValue())
     {
     case 1:
-        dieFace = "o";
+        dieFace = "\n" + side1OfDice + "\n" + diceBlank + "\n" + diceBlank + "\n" + oddDice + "\n" + diceBlank + "\n" + diceBlank + "\n" + " -----------";
         break;
     case 2:
-        dieFace = "oo";
+        dieFace = "\n" + side1OfDice + "\n" + evenDice1 + "\n" + diceBlank + "\n" + oddDice + "\n" + diceBlank + "\n" + evenDice2 + "\n" + " -----------";
         break;
     case 3:
-        dieFace = "ooo";
+        dieFace = "\n" + side1OfDice + "\n" + evenDice1 + "\n" + diceBlank + "\n" + oddDice + "\n" + diceBlank + "\n" + evenDice2 + "\n" + " -----------";
         break;
     case 4:
-        dieFace = "oooo";
+        dieFace = "\n" + side1OfDice + "\n" + "| o       o |\n" + diceBlank + "\n" + diceBlank + "\n" + diceBlank + "\n" + "| o       o |\n" + " -----------";
         break;
     case 5:
-        dieFace = "ooooo";
+        dieFace = "\n" + side1OfDice + "\n" + "| o       o |\n" + diceBlank + "\n" + oddDice + "\n" + diceBlank + "\n" + "| o       o |\n" + " -----------";
         break;
     case 6:
-        dieFace = "oooooo";
+        dieFace = "\n" + side1OfDice + "\n" + "| o       o |\n" + diceBlank + "\n" + "| o       o |\n" + diceBlank + "\n" + "| o       o |\n" + " -----------";
         break;
     }
+    return dieFace;
 }
