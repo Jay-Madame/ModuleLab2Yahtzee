@@ -22,9 +22,13 @@ int main()
         }
         std::cout<<"How many dices are you rolling?";
         std::cin>>ans;
-        newGame.rollDices(ans);
+        round = newGame.rollDices(ans);
     }
-
-    
+    ans = 0;
+    std::cout<<"What dice are you keeping? ";
+    std::cin>> ans;
+    newGame.gatherDice(ans);
+    newGame.scoreChange(ans);
+    newGame.displayBoxes();
     return 0;
 }

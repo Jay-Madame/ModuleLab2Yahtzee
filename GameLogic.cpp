@@ -4,12 +4,16 @@
 
 Game::Game() : bonus(35)
 {
+    dices[0].printRoll();
+    std::cout << std::endl;
     for (int i = 0; i < 5; i++)
     {
         std::cout << "Die " << (i + 1) << ":";
         std::cout << dices[i].dieToString(dices[i].getFaceValue()) << std::endl
                   << std::endl;
     }
+    boxes = new int[13];
+    std::fill_n(boxes, 13, 0);
 }
 
 Game::Game(int value) : bonus(value)
@@ -20,10 +24,13 @@ Game::Game(int value) : bonus(value)
         std::cout << dices[i].dieToString(dices[i].getFaceValue()) << std::endl
                   << std::endl;
     }
+    boxes = new int[13];
+    std::fill_n(boxes, 13, 0);
 }
 int Game::rollDices()
 {
     dices[0].printRoll();
+    std::cout << std::endl;
     rounds = 1;
     for (int i = 0; i < 5; i++)
     {
@@ -37,6 +44,7 @@ int Game::rollDices()
 int Game::rollDices(int dicesToRoll)
 {
     dices[0].printRoll();
+    std::cout << std::endl;
     rounds++;
     std::cout << "Which dices are you rolling? \n";
     for (int i = 0; i < dicesToRoll; i++)
@@ -54,10 +62,32 @@ int Game::rollDices(int dicesToRoll)
     }
     return rounds;
 }
-int Game::whichBox(int box)
+
+int Game::scoreChange(int box)
 {
-    
+    tempScore--;
+    *((box - 1) + boxes) = tempScore;
+    score += tempScore;
+    tempScore = 0;
+    return score;
 }
-int Game::scoreChange(int value)
+
+int Game::gatherDice(int value)
 {
+    for (int i = 0; i < 5; i++)
+    {
+        if (dices[i].getFaceValue() == value)
+        {
+            tempScore += value;
+        }
+    }
+    return tempScore;
+}
+
+void Game::displayBoxes()
+{
+    for (int i = 0; i < 13; i++)
+    {
+        std::cout << "Box " << (i + 1) << ": " << *(i + boxes) << std::endl;
+    }
 }
