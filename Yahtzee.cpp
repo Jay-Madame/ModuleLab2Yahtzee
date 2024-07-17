@@ -24,5 +24,7 @@ int main()
         std::cin>>ans;
         newGame.rollDices(ans);
     }
+
+    
     return 0;
 }

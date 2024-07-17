@@ -4,7 +4,7 @@
 class Game
 {
 private:
-    Die dices[6] = {Die(), Die(), Die(), Die(), Die(), Die()};
+    Die dices[5] = {Die(), Die(), Die(), Die(), Die()};
     int score, diceRoll, rounds;
     //int *boxes = nullptr;
     int const bonus;
