@@ -98,7 +98,8 @@ int Game::gatherDice(int value)
     return tempScore;
 }
 
-// diff kinds of scoring
+/* diff kinds of scoring... to be continued (doesn't work rn...
+ and im too tired for this)
 int Game::threeOfAKind(int value)
 {
     int same = 0;
@@ -205,7 +206,7 @@ int Game::chance()
     }
     return tempScore;
 }
-/*// sort for Yahtzee
+
 Die *Game::binarySort(Die *arr, int size)
 {
     for (int i = 1; i < size; ++i)

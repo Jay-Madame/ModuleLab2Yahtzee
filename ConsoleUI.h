@@ -1,5 +1,6 @@
 #pragma once
 #include "GameLogic.h"
+#include "Die.h"
 
 class Console
 {
@@ -10,8 +11,8 @@ private:
 
 public:
     Console();
+    void playingYahtzee();
     void changeABox();
-    void startGame();
     void continueGame();
     void endGame();
     void gameStats();

@@ -1,6 +1,11 @@
 #include <iostream>
 #include <ctime>
+#include "ConsoleUI.h"
 #include "ConsoleUI.cpp"
+#include "GameLogic.h"
+#include "GameLogic.cpp"
+#include "Die.h"
+#include "Die.cpp"
 
 int main()
 {
@@ -8,6 +13,7 @@ int main()
     int gameLength;
     std::string ans;
     Console newGame;
+    newGame.playingYahtzee();
     gameLength = newGame.getGameRound();
     while (gameLength < 14)
     {
