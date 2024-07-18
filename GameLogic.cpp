@@ -5,6 +5,7 @@
 Game::Game() : bonus(35)
 {
     gameRounds = 0;
+    score = 0;
     dices[0].printRoll();
     std::cout << std::endl;
     for (int i = 0; i < 5; i++)
