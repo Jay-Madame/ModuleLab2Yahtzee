@@ -1,9 +1,11 @@
 #pragma once
 #include "Die.h"
 #include "GameLogic.h"
-
+#include <algorithm>
+// constructors
 Game::Game() : bonus(35)
 {
+    gameRounds = 0;
     dices[0].printRoll();
     std::cout << std::endl;
     for (int i = 0; i < 5; i++)
@@ -27,8 +29,15 @@ Game::Game(int value) : bonus(value)
     boxes = new int[13];
     std::fill_n(boxes, 13, 0);
 }
+Game::~Game()
+{
+    delete[] boxes;
+}
+
+// rolling the Dices
 int Game::rollDices()
 {
+    gameRounds++;
     dices[0].printRoll();
     std::cout << std::endl;
     rounds = 1;
@@ -63,12 +72,17 @@ int Game::rollDices(int dicesToRoll)
     return rounds;
 }
 
+// changing some scores in ace through six
 int Game::scoreChange(int box)
 {
     tempScore--;
     *((box - 1) + boxes) = tempScore;
     score += tempScore;
     tempScore = 0;
+    if (gameRounds == 13 && score == 63)
+    {
+        score += bonus;
+    }
     return score;
 }
 
@@ -84,10 +98,182 @@ int Game::gatherDice(int value)
     return tempScore;
 }
 
+// diff kinds of scoring
+int Game::threeOfAKind(int value)
+{
+    int same = 0;
+    for (int i = 0; i < 5; i++)
+    {
+        if (dices[i].getFaceValue() == value)
+        {
+            same++;
+            tempScore += value;
+        }
+    }
+    if (same >= 3)
+    {
+        return tempScore;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+int Game::fourOfAKind(int value)
+{
+    int same = 0;
+    for (int i = 0; i < 5; i++)
+    {
+        if (dices[i].getFaceValue() == value)
+        {
+            same++;
+            tempScore += value;
+        }
+    }
+    if (same >= 4)
+    {
+        return tempScore;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+int Game::fullHouse(int value1, int value2)
+{
+    int same, same1 = 0;
+    for (int i = 0; i < 5; i++)
+    {
+        if (dices[i].getFaceValue() == value1)
+        {
+            same++;
+            tempScore += value1;
+        }
+        else if (dices[i].getFaceValue() == value2)
+        {
+            same1++;
+            tempScore += value2;
+        }
+    }
+    if ((same == 3 || same == 2) && (same1 == 3 || same1 == 2))
+    {
+        return tempScore;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+int Game::straight()
+{
+    int min = 0;
+    int total = 0;
+    bool isSequential;
+    for (int i = 0; i < 5; i++)
+    {
+        if (dices[i].getFaceValue() > min)
+        {
+            isSequential = true;
+            min = dices[i].getFaceValue();
+            total += min;
+        }
+        else
+        {
+            isSequential = false;
+            break;
+        }
+    }
+    if (isSequential == true)
+    {
+        tempScore = total;
+    }
+    else
+    {
+        tempScore = 0;
+    }
+    return tempScore;
+}
+
+int Game::chance()
+{
+    for (int i = 0; i < 5; i++)
+    {
+        tempScore += dices[i].getFaceValue();
+    }
+    return tempScore;
+}
+
+int Game::Yahtzee()
+{
+    std::sort(dices, dices + 5); 
+    int temp = straight();
+    if (temp != 0)
+    {
+        tempScore = temp;
+    }
+    else
+    {
+        tempScore = 0;
+    }
+    return tempScore;
+}
+
+
+// displaying scores
 void Game::displayBoxes()
 {
     for (int i = 0; i < 13; i++)
     {
-        std::cout << "Box " << (i + 1) << ": " << *(i + boxes) << std::endl;
+        switch (i)
+        {
+        case 0:
+            std::cout << "Aces: " << boxes[i];
+            break;
+        case 1:
+            std::cout << "Twos: " << boxes[i];
+            break;
+        case 2:
+            std::cout << "Threes: " << boxes[i];
+            break;
+        case 3:
+            std::cout << "Fours: " << boxes[i];
+            break;
+        case 4:
+            std::cout << "Fives: " << boxes[i];
+            break;
+        case 5:
+            std::cout << "Sixes: " << boxes[i];
+            break;
+        case 6:
+            std::cout << "Three of a Kind: " << boxes[i];
+            break;
+        case 7:
+            std::cout << "Four of a Kind: " << boxes[i];
+            break;
+        case 8:
+            std::cout << "Full house: " << boxes[i];
+            break;
+        case 9:
+            std::cout << "Small straight: " << boxes[i];
+            break;
+        case 10:
+            std::cout << "Large straight: " << boxes[i];
+            break;
+        case 11:
+            std::cout << "Chance: " << boxes[i];
+            break;
+        case 12:
+            std::cout << "Yahtzee: " << boxes[i];
+            break;
+        }
+        std::cout << std::endl;
     }
+}
+
+int Game::getScore()
+{
+    return score;
 }

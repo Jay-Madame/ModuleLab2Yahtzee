@@ -4,31 +4,29 @@
 #include "GameLogic.h"
 #include "GameLogic.cpp"
 #include <ctime>
+#include "ConsoleUI.h"
+#include "ConsoleUI.cpp"
 
 int main()
 {
     srand(time(0));
-    Game newGame;
-    char answer;
-    int ans, round;
-    round = 1;
-    while (round != 3)
+    int gameLength;
+    std::string ans;
+    Console newGame;
+    gameLength = newGame.getGameRound();
+    while (gameLength < 14)
     {
-        std::cout<<"Would you like to roll again? (y/n)";
-        std::cin>> answer;
-        if (answer == 'n')
+        newGame.changeABox();
+        std::cout << "Would you like to continue? (y/n) ";
+        std::cin >> ans;
+        if ((ans == "y") || (ans == "Y"))
         {
-            break;
+            newGame.continueGame();
         }
-        std::cout<<"How many dices are you rolling?";
-        std::cin>>ans;
-        round = newGame.rollDices(ans);
+        else
+            break;
+        gameLength = newGame.getGameRound();
     }
-    ans = 0;
-    std::cout<<"What dice are you keeping? ";
-    std::cin>> ans;
-    newGame.gatherDice(ans);
-    newGame.scoreChange(ans);
-    newGame.displayBoxes();
+    newGame.endGame();
     return 0;
 }
