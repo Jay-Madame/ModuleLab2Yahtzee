@@ -15,7 +15,7 @@ int main()
     Console newGame;
     newGame.playingYahtzee();
     gameLength = newGame.getGameRound();
-    while (gameLength < 14)
+    while (gameLength < 7)
     {
         newGame.changeABox();
         std::cout << "Would you like to continue? (y/n) ";
