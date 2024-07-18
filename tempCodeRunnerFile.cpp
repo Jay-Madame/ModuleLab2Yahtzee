@@ -1,5 +1,7 @@
 #include <iostream>
 #include <ctime>
+#include "Die.h"
+#include "Die.cpp"
 #include "ConsoleUI.cpp"
 
 int main()

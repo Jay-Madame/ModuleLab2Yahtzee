@@ -1,4 +1,3 @@
-#pragma once
 #include "Die.h"
 #include "GameLogic.h"
 #include <algorithm>
@@ -29,6 +28,7 @@ Game::Game(int value) : bonus(value)
     boxes = new int[13];
     std::fill_n(boxes, 13, 0);
 }
+
 Game::~Game()
 {
     delete[] boxes;
@@ -205,22 +205,40 @@ int Game::chance()
     }
     return tempScore;
 }
+/*// sort for Yahtzee
+Die *Game::binarySort(Die *arr, int size)
+{
+    for (int i = 1; i < size; ++i)
+    {
+        int key = arr[i].getFaceValue();
+        int left = 0;
+        int right = i - 1;
 
+        while (left <= right)
+        {
+            int mid = left + (right - left) / 2;
+            if (arr[mid].getFaceValue() > key)
+                right = mid - 1;
+            else
+                left = mid + 1;
+        }
+
+        Die temp = arr[i];
+        for (int j = i; j > left; --j)
+        {
+            arr[j] = arr[j - 1];
+        }
+        arr[left] = temp;
+    }
+    return arr;
+}
 int Game::Yahtzee()
 {
-    std::sort(dices, dices + 5); 
+    binarySort(dices, 5);
     int temp = straight();
-    if (temp != 0)
-    {
-        tempScore = temp;
-    }
-    else
-    {
-        tempScore = 0;
-    }
-    return tempScore;
+    return temp != 0 ? temp : 0;
 }
-
+*/
 
 // displaying scores
 void Game::displayBoxes()

@@ -37,7 +37,7 @@ int Die::getFaceValue()
 std::string Die::dieToString(int value)
 {
     std::string dieFace = "";
-    switch (getFaceValue())
+    switch (value)
     {
     case 1:
         dieFace = "\n" + side1OfDice + "\n" + diceBlank + "\n" + diceBlank + "\n" + oddDice + "\n" + diceBlank + "\n" + diceBlank + "\n" + " -----------";

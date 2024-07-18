@@ -1,7 +1,8 @@
 #include "ConsoleUI.h"
+#include <iostream>
 #include <string>
 
-Console::Console()
+Console::Console() : newGame()
 {
     round = 1;
     while (round != 3)
@@ -18,6 +19,7 @@ Console::Console()
     }
     ans = 0;
 }
+
 void Console::changeABox()
 {
     newGame.displayBoxes();
@@ -54,7 +56,8 @@ void Console::changeABox()
             newGame.straight();
             break;
         case 12:
-            newGame.Yahtzee();
+            std::cout<<"Not yet implemented :( "<<std::endl;
+            break;
         }
     }
     ansForScore = 0;
@@ -73,7 +76,6 @@ void Console::continueGame()
 }
 void Console::endGame()
 {
-    newGame.~Game();
     gameRound = 0;
     gameStats();
 }
